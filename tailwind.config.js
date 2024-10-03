@@ -10,7 +10,8 @@ export default {
       md: '768px',
       lg: '976px',
       xl: '1440px',
-    }, colors: {
+    },
+    colors: {
       'white': '#F8FAFC',
       'light-yellow': '#F5D565',
       'beige': '#F5E8D5',

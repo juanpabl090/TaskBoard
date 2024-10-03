@@ -1,11 +1,13 @@
 import { useState, } from 'react'
 import { login } from '../../services/userServices';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const useHistory = useHistory();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -19,8 +21,12 @@ export default function LoginPage() {
     event.preventDefault();
     try {
       const data = await login(username, password);
-      console.log(data);
-      useHistory.push('/dashboard')
+      localStorage.setItem('authResponse', JSON.stringify(data));
+      const authResponse = JSON.parse(localStorage.getItem('authResponse'));
+      console.log(authResponse);
+      if (data.status === 200) {
+        navigate('/DashBoardPage', { replace: true });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -74,9 +80,7 @@ export default function LoginPage() {
                   required
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
                   onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (
@@ -91,26 +95,6 @@ export default function LoginPage() {
                     </svg>
                   )}
                 </button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Recuérdame
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                  ¿Olvidaste tu contraseña?
-                </a>
               </div>
             </div>
 
