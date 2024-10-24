@@ -1,13 +1,18 @@
-/* eslint-disable react/prop-types */
-import { Navigate, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { LoginContext } from "../context/LoginProvider";
 
-const PrivateRoute = ({ children }) => {
-    const location = useLocation();
-    const isAuthenticated = localStorage.getItem('authResponse');
-    if (!isAuthenticated.status === 200) {
-        return <Navigate to="/login" state={{ from: location }} replace />
-    }
-    return children;
+const PrivateRoute = () => {
+	const { isLoggedIn } = useContext(LoginContext);
+
+	const location = useLocation();
+	if (!isLoggedIn) {
+		return <Navigate to='/login' state={{ from: location }} replace />
+	}
+	if (location.pathname === '/') {
+		return <Navigate to='/DashBoardPage' replace />
+	}
+	return <Outlet />;
 }
 
 export default PrivateRoute;

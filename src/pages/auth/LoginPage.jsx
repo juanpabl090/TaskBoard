@@ -1,11 +1,13 @@
-import { useState, } from 'react'
+import { useContext, useState, } from 'react'
 import { login } from '../../services/userServices';
 import { useNavigate } from 'react-router-dom';
+import { LoginContext } from '../../context/LoginProvider';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
 
 
@@ -20,12 +22,12 @@ export default function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const data = await login(username, password);
-      localStorage.setItem('authResponse', JSON.stringify(data));
-      const authResponse = JSON.parse(localStorage.getItem('authResponse'));
-      console.log(authResponse);
-      if (data.status === 200) {
-        navigate('/DashBoardPage', { replace: true });
+      const response = await login(username, password);
+      if (response.status === 200) {
+        setIsLoggedIn(JSON.stringify(response));
+        navigate('/DashBoardPage',
+          { replace: true }
+        );
       }
     } catch (error) {
       console.log(error);
@@ -34,7 +36,7 @@ export default function LoginPage() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

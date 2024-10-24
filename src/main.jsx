@@ -7,6 +7,7 @@ import DashBoardPage from './pages/userPages/DashBoardPage.jsx'
 import DashBoardPageEdit from './pages/userPages/DashBoardPageEdit.jsx'
 import LoginPage from './pages/auth/LoginPage.jsx'
 import NotFound from './pages/userPages/NotFound.jsx'
+import { LoginProvider } from './context/LoginProvider.jsx'
 /* import PrivateRoute from './components/PrivateRoute.jsx' */
 
 /* {
@@ -18,11 +19,10 @@ import NotFound from './pages/userPages/NotFound.jsx'
     ),
   }, */
 
-
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App />
   },
   {
     path: '/login',
@@ -31,22 +31,29 @@ const router = createBrowserRouter([
   },
   {
     path: '/DashBoardPage',
-    element: <DashBoardPage />
+    element: (
+      <DashBoardPage />
+    ),
 
   },
   {
     path: '/DashBoardPageEdit',
-    element: <DashBoardPageEdit />
-
+    element: (
+      <DashBoardPageEdit />
+    ),
   },
   {
     path: '/*',
-    element: <NotFound />,
+    element: (
+      <NotFound />
+    ),
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <LoginProvider>
+      <RouterProvider router={router} />
+    </LoginProvider>
   </StrictMode>,
 )
