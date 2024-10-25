@@ -1,6 +1,6 @@
 import { useContext, useState, } from 'react'
 import { login } from '../../services/userServices';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginProvider';
 
 export default function LoginPage() {
@@ -9,7 +9,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const { setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
-
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -23,8 +22,9 @@ export default function LoginPage() {
     event.preventDefault();
     try {
       const response = await login(username, password);
+      sessionStorage.setItem("data", JSON.stringify(response.data));
       if (response.status === 200) {
-        setIsLoggedIn(JSON.stringify(response));
+        setIsLoggedIn(true)
         navigate('/DashBoardPage',
           { replace: true }
         );
@@ -39,7 +39,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Log in
@@ -47,7 +47,7 @@ export default function LoginPage() {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10">
           <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit} >
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
@@ -109,7 +109,18 @@ export default function LoginPage() {
               </button>
             </div>
           </form>
+
+          <div className="flex py-3 justify-between" >
+            <div>
+              <p>¿No tienes una cuenta?</p>
+            </div>
+            <div>
+              <Link to="/Register" className='text-bright-blue' >Registrate!</Link>
+            </div>
+          </div>
         </div>
+      </div>
+      <div>
       </div>
     </div>
   )

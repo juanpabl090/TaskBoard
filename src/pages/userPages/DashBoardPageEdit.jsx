@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-import InputStatus from '../../components/InputStatus';
 import ButtonComponent from '../../components/ButtonComponent';
-
-import InputLabelComponent from '../../components/InputLabelComponent';
-import TextAreaLabelComponent from '../../components/TextAreaLabelComponent';
 import IconSelector from '../../components/IconSelector';
+import InputLabelComponent from '../../components/InputLabelComponent';
+import InputStatus from '../../components/InputStatus';
+import TextAreaLabelComponent from '../../components/TextAreaLabelComponent';
 
 const BoardPageEdit = ({ isOpen = false, onClose }) => {
   if (!isOpen) return null;
@@ -40,7 +39,7 @@ const BoardPageEdit = ({ isOpen = false, onClose }) => {
             <ButtonComponent text='Trash' icon='Trash' hoverColor='bg-bright-red' />
             <ButtonComponent text='Save' icon='Done_round' hoverColor='bg-bright-green' color='bg-bright-blue' />
           </div>
-
+          
         </form>
       </div>
     </div>

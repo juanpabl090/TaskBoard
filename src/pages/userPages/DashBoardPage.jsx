@@ -6,7 +6,6 @@ import dataMockup from '../../DataMockup.json';
 const DashBoardPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-
   const handleOpen = () => {
     setIsOpen(true);
   }
@@ -50,10 +49,6 @@ const DashBoardPage = () => {
       </div>
     </div >
   );
-};
-
-BoardPageEdit.defaultProps = {
-  isOpen: false,
 };
 
 export default DashBoardPage;

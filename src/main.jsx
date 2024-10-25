@@ -1,46 +1,41 @@
 import './assets/styles/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
-import { StrictMode } from 'react'
-import App from './App.jsx'
+import { LoginProvider } from './context/LoginProvider.jsx'
 import DashBoardPage from './pages/userPages/DashBoardPage.jsx'
 import DashBoardPageEdit from './pages/userPages/DashBoardPageEdit.jsx'
 import LoginPage from './pages/auth/LoginPage.jsx'
 import NotFound from './pages/userPages/NotFound.jsx'
-import { LoginProvider } from './context/LoginProvider.jsx'
-/* import PrivateRoute from './components/PrivateRoute.jsx' */
-
-/* {
-    path: '/login',
-    element: (
-      <PrivateRoute>
-        <LoginPage />
-      </PrivateRoute>
-    ),
-  }, */
+import PrivateRoute from './components/PrivateRoute.jsx'
+import RegisterPage from './pages/auth/RegisterPage.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
-  },
-  {
-    path: '/login',
     element: <LoginPage />
-
   },
   {
-    path: '/DashBoardPage',
+    path: '/Register',
     element: (
-      <DashBoardPage />
+      <RegisterPage />
     ),
-
   },
   {
-    path: '/DashBoardPageEdit',
-    element: (
-      <DashBoardPageEdit />
-    ),
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: '/DashBoardPage',
+        element: (
+          <DashBoardPage />
+        ),
+      },
+      {
+        path: '/DashBoardPageEdit',
+        element: (
+          <DashBoardPageEdit />
+        ),
+      }
+    ]
   },
   {
     path: '/*',
@@ -51,9 +46,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <LoginProvider>
-      <RouterProvider router={router} />
-    </LoginProvider>
-  </StrictMode>,
+  <LoginProvider>
+    <RouterProvider router={router} />
+  </LoginProvider>
 )
