@@ -7,7 +7,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { setIsLoggedIn } = useContext(LoginContext);
+  const { logIn } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -22,12 +22,9 @@ export default function LoginPage() {
     event.preventDefault();
     try {
       const response = await login(username, password);
-      sessionStorage.setItem("data", JSON.stringify(response.data));
       if (response.status === 200) {
-        setIsLoggedIn(true)
-        navigate('/DashBoardPage',
-          { replace: true }
-        );
+        const token = response.data.jwt;
+        logIn(token, navigate);
       }
     } catch (error) {
       console.log(error);

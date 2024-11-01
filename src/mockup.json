@@ -1,6 +1,48 @@
 {
-	"username": "juan01",
-	"message": "User logged",
-	"status": true,
-	"jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBVVRIMC1KV1QtQkFDS0VORCIsInN1YiI6Imp1YW4wMSIsIkF1dGhvcml0aWVzIjoiQ1JFQVRFUkVBRFJPTEVfVVNFUlVQREFURSIsImlhdCI6MTcyOTc5OTY0NywiZXhwIjoxNzI5ODAxNDQ3LCJqdGkiOiIzMGU3NWFlNC0wNDU4LTRkM2ItOGE0NS02ODk0MWFlOTdkODQiLCJuYmYiOjE3Mjk3OTk2NDd9.vF5e7nrjye6z9PCg81F1sFhIk1yFHEp67O9nsPgE62Y"
+	"data": {
+		"username": "juan01",
+		"message": "User logged",
+		"status": true,
+		"jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBVVRIMC1KV1QtQkFDS0VORCIsInN1YiI6Imp1YW4wMSIsIkF1dGhvcml0aWVzIjoiQ1JFQVRFUkVBRFJPTEVfVVNFUlVQREFURSIsImlhdCI6MTcyOTgxODk4NiwiZXhwIjoxNzI5ODIwNzg2LCJqdGkiOiJmZjFmNTYxNC1lZjU0LTQ4ZmYtYjFjNC1iOTcwNDFhM2YyMDIiLCJuYmYiOjE3Mjk4MTg5ODZ9.kzvPVktJtMLXMfccmGbDsB_6F-tXkFg0Eb1hl6BGTlA"
+	},
+	"status": 200,
+	"statusText": "",
+	"headers": {
+		"cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+		"content-type": "application/json",
+		"expires": "0",
+		"pragma": "no-cache"
+	},
+	"config": {
+		"transitional": {
+			"silentJSONParsing": true,
+			"forcedJSONParsing": true,
+			"clarifyTimeoutError": false
+		},
+		"adapter": [
+			"xhr",
+			"http",
+			"fetch"
+		],
+		"transformRequest": [
+			null
+		],
+		"transformResponse": [
+			null
+		],
+		"timeout": 0,
+		"xsrfCookieName": "XSRF-TOKEN",
+		"xsrfHeaderName": "X-XSRF-TOKEN",
+		"maxContentLength": -1,
+		"maxBodyLength": -1,
+		"env": {},
+		"headers": {
+			"Accept": "application/json, text/plain, */*",
+			"Content-Type": "application/json"
+		},
+		"method": "post",
+		"url": "http://localhost:8081/sign-in",
+		"data": "{\"username\":\"juan01\",\"password\":\"1234\"}"
+	},
+	"request": {}
 }
