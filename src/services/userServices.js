@@ -7,3 +7,5 @@ export const login = async (username, password) =>
 		username: username,
 		password: password
 	});
+
+export const signUp = async (formData) => await axios.post(URL + "/sign-up", formData);

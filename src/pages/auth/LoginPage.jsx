@@ -24,6 +24,7 @@ export default function LoginPage() {
       const response = await login(username, password);
       if (response.status === 200) {
         const token = response.data.jwt;
+        console.log(token);
         logIn(token, navigate);
       }
     } catch (error) {

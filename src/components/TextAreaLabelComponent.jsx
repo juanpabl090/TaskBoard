@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 
-function TextAreaLabelComponent({ title, id, placeholder = 'Enter a short description...', name, maxLength = 50, rows = 10 }) {
+function TextAreaLabelComponent({ title, id, placeholder = 'Enter a short description...', name, maxLength = 50, rows = 10, HtmlFor, onChange }) {
 	return (
 		<div className="input flex flex-col w-full static">
 			<label
-				htmlFor="input"
+				htmlFor={HtmlFor}
 				className="block text-bright-gray font-semibold text-sm"
 			>
 				{title}
@@ -17,6 +17,7 @@ function TextAreaLabelComponent({ title, id, placeholder = 'Enter a short descri
 				maxLength={maxLength}
 				rows={rows}
 				style={{ resize: 'none' }}
+				onChange={onChange}
 				className="border-bright-gray focus:border-bright-blue input px-[10px] py-[11px] text-xs bg-[#e8e8e8] border-2 rounded-[5px] w-full focus:outline-none placeholder:text-black/25"
 			/>
 		</div>
@@ -25,11 +26,13 @@ function TextAreaLabelComponent({ title, id, placeholder = 'Enter a short descri
 
 TextAreaLabelComponent.propTypes = {
 	title: PropTypes.string.isRequired,
-	id: PropTypes.string.isRequired,
+	id: PropTypes.string,
 	placeholder: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
-	maxLength: PropTypes.number.isRequired,
-	rows: PropTypes.number.isRequired,
+	maxLength: PropTypes.number,
+	rows: PropTypes.number,
+	HtmlFor: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired
 }
 
 export default TextAreaLabelComponent

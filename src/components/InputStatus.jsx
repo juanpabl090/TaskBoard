@@ -8,9 +8,12 @@ const icons = {
 	'Wont Do': 'close_ring_duotone.svg'
 };
 
-const InputStatus = ({ titleStatus = 'In Progress' }) => {
+const InputStatus = ({ titleStatus = 'In Progress', onChange, htmlFor, value }) => {
+
 	return (
-		<label className="has-[:checked]:bg-white/30 has-[:checked]:text-indigo-900 has-[:checked]:ring-bright-blue has-[:checked]:ring-2 cursor-pointer bg-white/40 hover:bg-white/20 w-full h-full md:lg:xl:p-4 p-2 rounded-3xl flex justify-between items-center shadow">
+		<label
+			htmlFor={htmlFor}
+			className="has-[:checked]:bg-white/30 has-[:checked]:text-bright-blue has-[:checked]:ring-bright-blue has-[:checked]:ring-2 cursor-pointer bg-white/40 hover:bg-white/20 w-full h-full md:lg:xl:p-4 p-2 rounded-3xl flex justify-between items-center shadow">
 			<div className="flex items-center space-x-5">
 				<div className="flex items-center">
 					<div className={`flex items-center w-10 h-10 
@@ -29,8 +32,11 @@ const InputStatus = ({ titleStatus = 'In Progress' }) => {
 			</div>
 			<input
 				type="radio"
-				name="payment"
+				name='ETaskStatus'
+				value={value}
 				className="checked:border-indigo-500 h-5 w-5"
+				required
+				onChange={onChange}
 			/>
 		</label >
 	);
@@ -38,6 +44,9 @@ const InputStatus = ({ titleStatus = 'In Progress' }) => {
 
 InputStatus.propTypes = {
 	titleStatus: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+	htmlFor: PropTypes.string.isRequired
 };
 
 export default InputStatus;

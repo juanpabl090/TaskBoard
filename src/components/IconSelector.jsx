@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import { useState } from "react";
 
-const IconSelector = () => {
+const IconSelector = ({ onIconSelect }) => {
 	// Lista de iconos
 	const icons = [
 		{ id: 1, src: "/src/assets/userIcons/developer.svg", alt: "Developer Icon" },
@@ -15,8 +16,9 @@ const IconSelector = () => {
 	const [selectedIcon, setSelectedIcon] = useState(null);
 
 	// Función para manejar el click en el icono
-	const handleIconClick = (id) => {
-		setSelectedIcon(id);
+	const handleIconClick = (icon) => {
+		setSelectedIcon(icon.id);
+		onIconSelect(icon.src);
 	};
 
 	return (
@@ -26,7 +28,7 @@ const IconSelector = () => {
 					key={icon.id}
 					className={`p-2 rounded-xl cursor-pointer transition-all duration-300 ease-in-out ${selectedIcon === icon.id ? "bg-amber" : "bg-light-gray"
 						}`}
-					onClick={() => handleIconClick(icon.id)}
+					onClick={() => handleIconClick(icon)}
 				>
 					<img
 						src={icon.src}
@@ -38,5 +40,9 @@ const IconSelector = () => {
 		</div>
 	);
 };
+
+IconSelector.propTypes = {
+	onIconSelect: PropTypes.func.isRequired,
+}
 
 export default IconSelector;

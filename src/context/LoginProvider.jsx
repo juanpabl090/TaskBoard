@@ -35,9 +35,12 @@ const LoginProvider = ({ children }) => {
 		navigate('/DashBoardPage', { replace: true })
 	}
 
-	const logOut = () => {
+	const logOut = (navigate) => {
 		localStorage.removeItem("token");
 		setIsLoggedIn(false);
+		if (navigate) {
+			navigate('/login', { replace: true })
+		}
 	}
 
 	return (
