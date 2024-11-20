@@ -42,7 +42,7 @@ const IconSelector = ({ onIconSelect }) => {
 };
 
 IconSelector.propTypes = {
-	onIconSelect: PropTypes.func.isRequired,
+	onIconSelect: PropTypes.func,
 }
 
 export default IconSelector;

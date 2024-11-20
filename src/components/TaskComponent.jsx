@@ -25,9 +25,9 @@ const TaskComponent = ({ task, icon = 'books.svg', status = 'InProgress' }) => {
 }
 
 TaskComponent.propTypes = {
-	task: PropTypes.string.isRequired,
-	icon: PropTypes.string.isRequired,
-	status: PropTypes.string.isRequired,
+	task: PropTypes.string,
+	icon: PropTypes.string,
+	status: PropTypes.string
 };
 
 export default TaskComponent;

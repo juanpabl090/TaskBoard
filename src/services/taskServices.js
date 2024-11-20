@@ -26,3 +26,11 @@ export const editTask = async (token, idTask, taskData) => {
 		},
 	});
 };
+
+export const softDeleteById = async (token, idTask) => {
+	await axios.patch(`tasks/${idTask}/soft-delete`, null, {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+};

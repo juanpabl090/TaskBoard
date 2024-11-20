@@ -25,14 +25,14 @@ function TextAreaLabelComponent({ title, id, placeholder = 'Enter a short descri
 }
 
 TextAreaLabelComponent.propTypes = {
-	title: PropTypes.string.isRequired,
+	title: PropTypes.string,
 	id: PropTypes.string,
-	placeholder: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
+	placeholder: PropTypes.string,
+	name: PropTypes.string,
 	maxLength: PropTypes.number,
 	rows: PropTypes.number,
-	HtmlFor: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired
+	HtmlFor: PropTypes.string,
+	onChange: PropTypes.func
 }
 
 export default TextAreaLabelComponent

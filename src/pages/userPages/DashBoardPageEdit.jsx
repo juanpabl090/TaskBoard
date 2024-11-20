@@ -1,17 +1,19 @@
-import PropTypes from 'prop-types';
+import { editTask, createTask, softDeleteById } from '../../services/taskServices';
+import { jwtDecode } from 'jwt-decode';
+import { useState } from 'react';
 import ButtonComponent from '../../components/ButtonComponent';
 import IconSelector from '../../components/IconSelector';
 import InputLabelComponent from '../../components/InputLabelComponent';
 import InputStatus from '../../components/InputStatus';
+import PropTypes from 'prop-types';
 import TextAreaLabelComponent from '../../components/TextAreaLabelComponent';
-import { editTask } from '../../services/taskServices';
-import { useState } from 'react';
 
 const BoardPageEdit = ({ isOpen = false, onClose, task }) => {
   const [dataTask, setDataTask] = useState({});
   const [selectedIconSrc, setSelectedIconSrc] = useState(null);
 
   if (!isOpen) return null;
+  const token = localStorage.getItem("token");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,14 +24,35 @@ const BoardPageEdit = ({ isOpen = false, onClose, task }) => {
     }))
   };
 
-  const handleSubmit = async (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token");
-      await editTask(token, task.idTask, dataTask);
+      await softDeleteById(token, task.idTask);
       window.location.reload();
     } catch (error) {
       console.error(error);
+
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (task.idTask) {
+      try {
+        await editTask(token, task.idTask, dataTask);
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const decode = jwtDecode(token);
+        await createTask(token, decode.jti, dataTask);
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+
+      }
     }
   };
 
@@ -66,8 +89,9 @@ const BoardPageEdit = ({ isOpen = false, onClose, task }) => {
           </div>
 
           <div className='flex gap-2 justify-end '>
-            <ButtonComponent text='Trash' icon='Trash' hoverColor='bg-bright-red' color='bg-bright-gray' />
-            <ButtonComponent text='Save' icon='Done_round' hoverColor='bg-bright-green' color='bg-bright-blue' />
+            <ButtonComponent text='Trash' icon='Trash' hoverColor='bg-bright-red' color='bg-bright-gray' type='button'
+              onClick={handleDelete} />
+            <ButtonComponent text='Save' icon='Done_round' hoverColor='bg-bright-green' color='bg-bright-blue' type='submit' />
           </div>
 
         </form>
@@ -80,7 +104,7 @@ BoardPageEdit.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
   task: PropTypes.shape({
-    idTask: PropTypes.number.isRequired,
+    idTask: PropTypes.number,
     title: PropTypes.string,
     description: PropTypes.string
   })

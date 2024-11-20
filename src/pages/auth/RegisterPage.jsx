@@ -23,9 +23,8 @@ const RegisterPage = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		try {
-			const { data, status } = await signUp(formData);
+			const { status } = await signUp(formData);
 			if (status == 201) {
-				console.log(data);
 				navigate("/login", { replace: true })
 			}
 		} catch (error) {

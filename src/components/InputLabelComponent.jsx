@@ -30,13 +30,13 @@ const InputLabelComponent = ({
 };
 
 InputLabelComponent.propTypes = {
-	titleInput: PropTypes.string.isRequired,
-	htmlFor: PropTypes.string.isRequired,
+	titleInput: PropTypes.string,
+	htmlFor: PropTypes.string,
 	id: PropTypes.string,
 	type: PropTypes.string,
-	name: PropTypes.string.isRequired,
-	placeholder: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
+	name: PropTypes.string,
+	placeholder: PropTypes.string,
+	onChange: PropTypes.func,
 };
 
 export default InputLabelComponent;

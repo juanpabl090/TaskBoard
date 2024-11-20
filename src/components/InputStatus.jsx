@@ -34,8 +34,8 @@ const InputStatus = ({ titleStatus = 'In Progress', onChange, htmlFor, value }) 
 				type="radio"
 				name='ETaskStatus'
 				value={value}
-				className="checked:border-indigo-500 h-5 w-5"
 				required
+				className="checked:border-indigo-500 h-5 w-5"
 				onChange={onChange}
 			/>
 		</label >
@@ -43,10 +43,10 @@ const InputStatus = ({ titleStatus = 'In Progress', onChange, htmlFor, value }) 
 };
 
 InputStatus.propTypes = {
-	titleStatus: PropTypes.string.isRequired,
-	value: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
-	htmlFor: PropTypes.string.isRequired
+	titleStatus: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func,
+	htmlFor: PropTypes.string
 };
 
 export default InputStatus;
